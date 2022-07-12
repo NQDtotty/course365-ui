@@ -1,0 +1,30 @@
+#slide-content {
+    padding-top: 46px;
+    /* background-color: rgb(17, 114, 131); */
+    /* height: 600px; */
+}
+
+#content-slide-text {
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+
+#content-slide-text-description {
+    opacity: 0.5;
+}
+
+#course-recomend {
+    padding: 70px;
+}
+
+#course-popular {
+    padding: 70px;
+}
+
+#course-trending {
+    padding: 70px;
+}
+
+.link-footer {
+    margin: 0 20px 0 20px;
+}

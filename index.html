@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Course 365 - Learning with unlimited!</title>
+
+    <!-- Nhúng các thư viện BS4 & jQuery, awesome font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Các file css và js tự định nghĩa thêm -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <!-- 1. Header - Navbar menu -->
+    <div id="header">
+        <nav class="nav navbar-expand-lg navbar-light bg-light fixed-top p-2">
+            <div class="col-sm-2">
+                <a class="navbar-brand" href="#">
+                    <img src="./images/Ionic_logo.png" alt="logo" style="width:80px;">
+                </a>
+            </div>
+            <div class="col-sm-7">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                            Browse courses
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Web Development</a>
+                            <a class="dropdown-item" href="#">Mobile App</a>
+                            <a class="dropdown-item" href="#">Desktop App</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            About Us
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Vision & Mission</a>
+                            <a class="dropdown-item" href="#">Team</a>
+                            <a class="dropdown-item" href="#">Contact Us</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <form class="form-inline postion-relative" action="#">
+                    <input class="form-control mr-sm-2 pl-5" type="text" id="inp-search" placeholder="Search Courses">
+                    <i class="fas fa-search position-absolute ml-3"></i>
+                    <button class="btn btn-light border-primary text-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+    <!-- 2. Slide body -->
+    <div id="slide-content">
+        <div class="container-fluid bg-info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6" id="content-slide-text">
+                        <h1 class="text-white">Welcome to Ionic Course365</h1>
+                        <h1 class="text-white">Learning Center</h1>
+                        <p class="text-white" id="content-slide-text-description">Ionic Course365 is an online learning
+                            and teaching markerplace with over
+                            5000 courses and 1
+                            million students. Instructor and expertly crafted courses, designed for modern students and
+                            entrepreneur</p>
+                        <div class="row">
+                            <button class="btn btn-warning m-3">Browse Courses</button>
+                            <button class="btn btn-light m-3">Become an Instructor</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <img src="./images/ionic-207965.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 3. Courses content -->
+    <div id="courses-content">
+        <div class="container-fluid bg-light">
+            <div class="container" id="course-recomend">
+                <div class="row">
+                    <h2>Recommend to you</h2>
+                </div>
+                <div class="row">
+                    <div class="card-deck">
+                        <div class="card">
+                            <img class="card-img-top" src="./images/courses/course-angular.jpg" alt="Card image"
+                                style="width:100%">
+                            <div class="card-body">
+                                <h4 class="card-title">How to easily create a website with Angular</h4>
+                                <p class="card-text"><i class="fas fa-clock"></i> 3h 56m Beginner</p>
+                                <p class="card-text"><b>$600</b> <del>$750</del></p>
+                            </div>
+                            <div class="card-footer">
+                                <img src="./images/teacher/morris_mccoy.jpg" alt="" style="width: 25px"
+                                    class="rounded-circle">
+                                <span>Morris Mccoy</span>
+                                <i class="fas fa-bookmark ml-4"></i>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="./images/courses/course-python.jpg" alt="Card image"
+                                style="width:100%">
+                            <div class="card-body">
+                                <h4 class="card-title">The Python Course: build web application</h4>
+                                <p class="card-text"><i class="fas fa-clock"></i> 4h 30m Advanced</p>
+                                <p class="card-text"><b>$900</b> <del>$1050</del></p>
+                            </div>
+                            <div class="card-footer">
+                                <img src="./images/teacher/claire_robertson.jpg" alt="" style="width: 25px"
+                                    class="rounded-circle">
+                                <span>Claire Robertson</span>
+                                <i class="fas fa-bookmark ml-4"></i>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="./images/courses/course-graphql.jpg" alt="Card image"
+                                style="width:100%">
+                            <div class="card-body">
+                                <h4 class="card-title">GraphQL: introduction to graphQL for beginners</h4>
+                                <p class="card-text"><i class="fas fa-clock"></i> 2h 15m Intermediate</p>
+                                <p class="card-text"><b>$650</b> <del>$850</del></p>
+                            </div>
+                            <div class="card-footer">
+                                <img src="./images/teacher/ted_hawkins.jpg" alt="" style="width: 25px"
+                                    class="rounded-circle">
+                                <span>Ted Hawkins</span>
+                                <i class="fas fa-bookmark ml-4"></i>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="./images/courses/course-javascript.jpg" alt="Card image"
+                                style="width:100%">
+                            <div class="card-body">
+                                <h4 class="card-title">Getting Started with JavaScript</h4>
+                                <p class="card-text"><i class="fas fa-clock"></i> 3h 34m Beginner</p>
+                                <p class="card-text"><b>$300</b> <del>$550</del></p>
+                            </div>
+                            <div class="card-footer">
+                                <img src="./images/teacher/ted_hawkins.jpg" alt="" style="width: 25px"
+                                    class="rounded-circle">
+                                <span>Ted Hawkins</span>
+                                <i class="fas fa-bookmark ml-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="container" id="course-popular">
+                    <div class="row">
+                        <h2>Most Popular</h2>
+                    </div>
+                    <div class="row">
+                        <div class="card-deck" id="card-popular-courses">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="container" id="course-trending">
+                    <div class="row">
+                        <h2>Trending</h2>
+                    </div>
+                    <div class="row">
+                        <div class="card-deck" id="card-trending-courses">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 4. Footer -->
+    <div id="footer">
+        <div class="container bg-light">
+            <div class="row">
+                <div class="col-sm-6 text-center">
+                    <p>&copy; 2021 Ionic Course365. All Rights Reserved.</p>
+                </div>
+                <div class="col-sm-6 text-center">
+                    <a href="#" class="link-footer">Privacy</a>
+                    <a href="#" class="link-footer">Terms</a>
+                    <a href="#" class="link-footer">Feedback</a>
+                    <a href="#" class="link-footer">Support</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

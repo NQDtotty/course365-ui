@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Courses</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Data Table-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h2>QUẢN LÝ COURSES</h2>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success" id="btn-add-course"><i class="fa fa-plus"></i>&nbsp; New course</button>
+        </div>
+    </div>
+    <!-- Vouche Data Table -->
+    <div class="container">
+        <table class="table table-bordered table-striped table-hover" id="courses-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>COURSE CODE</th>
+                    <th>COURSE NAME</th>
+                    <th>DURATION</th>
+                    <th>LEVEL</th>
+                    <th>PRICE</th>
+                    <th>DISCOUNT PRICE</th>
+                    <th>TEACHER</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <!-- Create voucher modal -->
+    <div>
+        <div id="create-course-modal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="h5-modal-title">Create new course</h5>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row form-group">
+                                <div class="col-sm-4">
+                                    <label for="input-course-code">Course Code</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input type="text" id="input-course-code" name="coursecode"
+                                        placeholder="Course Code" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-4">
+                                    <label for="input-course-name">Course Name</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input type="text" id="input-course-name" name="coursename"
+                                        placeholder="Course Name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-4">
+                                    <label for="input-duration">Duration</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input type="text" id="input-duration" name="duration" placeholder="Duration"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-4">
+                                    <label for="input-level">Level</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input type="text" id="input-level" name="level" placeholder="Level"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-4">
+                                    <label for="input-price">Price</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input type="text" id="input-price" name="price" placeholder="Price"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-4">
+                                    <label for="input-discount-price">Discount Price</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input type="text" id="input-discount-price" name="discountprice"
+                                        placeholder="Discount Price" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-4">
+                                    <label for="input-teacher">Teacher Name</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input type="text" id="input-teacher" name="teacher" placeholder="Teacher"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" id="btn-create-cancel" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" id="btn-create-course">Create Course</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update voucher modal -->
+    <div>
+        <div id="update-course-modal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="h5-modal-title">Update a Course</h5>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label for="input-update-course-code">Course Code</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="input-update-course-code" name="coursecode"
+                                    placeholder="Course Code" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label for="input-update-course-name">Course Name</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="input-update-course-name" name="coursename"
+                                    placeholder="Course Name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label for="input-update-duration">Duration</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="input-update-duration" name="duration" placeholder="Duration"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label for="input-update-level">Level</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="input-update-level" name="level" placeholder="Level"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label for="input-update-price">Price</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="input-update-price" name="price" placeholder="Price"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label for="input-update-discount-price">Discount Price</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="input-update-discount-price" name="discountprice"
+                                    placeholder="Discount Price" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label for="input-update-teacher">Teacher Name</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="input-update-teacher" name="teacher" placeholder="Teacher"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" id="btn-update-cancel" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" id="btn-update-course">Update Course</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete confirm modal -->
+    <div>
+        <div class="modal fade" tabindex="-1" id="delete-confirm-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="h5-modal-title">Course Delete Confirmation</h5>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <label>Bạn có chắc chắn muốn xóa course này không?</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" id="btn-confirm-delete-course">Confirm</button>
+                        <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        // REGION 1
+        var gCoursesDB = {
+            description: "This DB includes all courses in system",
+            courses: [
+                {
+                    id: 1,
+                    courseCode: "FE_WEB_ANGULAR_101",
+                    courseName: "How to easily create a website with Angular",
+                    price: 750,
+                    discountPrice: 600,
+                    duration: "3h 56m",
+                    level: "Beginner",
+                    coverImage: "images/courses/course-angular.jpg",
+                    teacherName: "Morris Mccoy",
+                    teacherPhoto: "images/teacher/morris_mccoy.jpg",
+                    isPopular: false,
+                    isTrending: true
+                },
+                {
+                    id: 2,
+                    courseCode: "BE_WEB_PYTHON_301",
+                    courseName: "The Python Course: build web application",
+                    price: 1050,
+                    discountPrice: 900,
+                    duration: "4h 30m",
+                    level: "Advanced",
+                    coverImage: "images/courses/course-python.jpg",
+                    teacherName: "Claire Robertson",
+                    teacherPhoto: "images/teacher/claire_robertson.jpg",
+                    isPopular: false,
+                    isTrending: true
+                },
+                {
+                    id: 5,
+                    courseCode: "FE_WEB_GRAPHQL_104",
+                    courseName: "GraphQL: introduction to graphQL for beginners",
+                    price: 850,
+                    discountPrice: 650,
+                    duration: "2h 15m",
+                    level: "Intermediate",
+                    coverImage: "images/courses/course-graphql.jpg",
+                    teacherName: "Ted Hawkins",
+                    teacherPhoto: "images/teacher/ted_hawkins.jpg",
+                    isPopular: true,
+                    isTrending: false
+                },
+                {
+                    id: 6,
+                    courseCode: "FE_WEB_JS_210",
+                    courseName: "Getting Started with JavaScript",
+                    price: 550,
+                    discountPrice: 300,
+                    duration: "3h 34m",
+                    level: "Beginner",
+                    coverImage: "images/courses/course-javascript.jpg",
+                    teacherName: "Ted Hawkins",
+                    teacherPhoto: "images/teacher/ted_hawkins.jpg",
+                    isPopular: true,
+                    isTrending: true
+                },
+                {
+                    id: 8,
+                    courseCode: "FE_WEB_CSS_111",
+                    courseName: "CSS: ultimate CSS course from beginner to advanced",
+                    price: 750,
+                    discountPrice: 600,
+                    duration: "3h 56m",
+                    level: "Beginner",
+                    coverImage: "images/courses/course-css.jpg",
+                    teacherName: "Juanita Bell",
+                    teacherPhoto: "images/teacher/juanita_bell.jpg",
+                    isPopular: true,
+                    isTrending: true
+                },
+                {
+                    id: 14,
+                    courseCode: "FE_WEB_WORDPRESS_111",
+                    courseName: "Complete Wordpress themes & plugins",
+                    price: 1050,
+                    discountPrice: 900,
+                    duration: "4h 30m",
+                    level: "Advanced",
+                    coverImage: "images/courses/course-wordpress.jpg",
+                    teacherName: "Clevaio Simon",
+                    teacherPhoto: "images/teacher/clevaio_simon.jpg",
+                    isPopular: true,
+                    isTrending: false
+                }
+            ]
+        }
+        const gCOURSES_COLS = ["id", "courseCode", "courseName", "duration", "level", "price", "discountPrice", "teacherName", "action"];
+        const gID_COL = 0;
+        const gCOURSE_CODE_COL = 1;
+        const gCOURSE_NAME_COL = 2;
+        const gDURATION_COL = 3;
+        const gLEVEL_COL = 4;
+        const gPRICE_COL = 5;
+        const gDISCOUNT_PRICE_COL = 6;
+        const gTEACHER_COL = 7;
+        const gACTION_COL = 8;
+
+        var gCourseId = 0;
+        var gCourseIdDelete = 0;
+
+        var gCoursesTable = $("#courses-table").DataTable({
+            columns: [
+                { data: gCOURSES_COLS[gID_COL] },
+                { data: gCOURSES_COLS[gCOURSE_CODE_COL] },
+                { data: gCOURSES_COLS[gCOURSE_NAME_COL] },
+                { data: gCOURSES_COLS[gDURATION_COL] },
+                { data: gCOURSES_COLS[gLEVEL_COL] },
+                { data: gCOURSES_COLS[gPRICE_COL] },
+                { data: gCOURSES_COLS[gDISCOUNT_PRICE_COL] },
+                { data: gCOURSES_COLS[gTEACHER_COL] },
+                { data: gCOURSES_COLS[gACTION_COL] }
+            ],
+            columnDefs: [
+                { // định nghĩa lại cột action
+                    targets: gACTION_COL,
+                    defaultContent: `
+          <img class="edit-course" src="https://cdn0.iconfinder.com/data/icons/glyphpack/45/edit-alt-512.png" style="width: 20px;cursor:pointer;">
+          <img class="delete-course" src="https://cdn4.iconfinder.com/data/icons/complete-common-version-6-4/1024/trash-512.png" style="width: 20px;cursor:pointer;">
+        `
+                }
+            ]
+        });
+        // REGION 2
+        $("#btn-add-course").on("click", function () {
+            onBtnAddNewVoucherClick();
+        })
+
+        $("#btn-create-course").on("click", function () {
+            onBtnCreateCourseClick();
+        });
+
+        $("#courses-table").on("click", ".edit-course", function () {
+            onBtnEditCourseClick(this);
+        });
+
+        $("#btn-update-course").on("click", function () {
+            onBtnUpdateCourseClick();
+        });
+
+        $("#courses-table").on("click", ".delete-course", function () {
+            onBtnDeleteClick(this);
+        });
+
+        $("#btn-confirm-delete-course").on("click", function () {
+            onBtnConfirmDeleteCourseClick();
+        })
+        onPageLoading();
+        // REGION 3
+        function onPageLoading() {
+            loadDataToTable(gCoursesDB.courses);
+        }
+
+        function onBtnAddNewVoucherClick() {
+            // hiển thị modal trắng lên
+            $("#create-course-modal").modal("show");
+        }
+
+        function onBtnCreateCourseClick() {
+            // khai báo đối tượng chứa voucher data
+            var vCourseObj = {
+                "id": 0,
+                "courseCode": "",
+                "courseName": "",
+                "duration": "",
+                "level": "",
+                "price": "",
+                "discountPrice": "",
+                "teacherName": "",
+            };
+            // B1: Thu thập dữ liệu
+            getCreateCourseData(vCourseObj);
+            // B2: Validate insert
+            var vIsCourseValidate = validateCourseData(vCourseObj);
+            if (vIsCourseValidate) {
+                // B3: insert course
+                insertCourse(vCourseObj);
+                // B4: xử lý front-end
+                alert("Thêm course thành công!");
+                loadDataToTable(gCoursesDB.courses);
+                resertCreateCourseForm();
+                $("#create-course-modal").modal("hide");
+            }
+        }
+
+        function onBtnEditCourseClick(paramBtnEdit) {
+            // lưu thông tin voucherId đang được edit vào biến toàn cục
+            gCourseId = getCourseIdFromButton(paramBtnEdit);
+            // load dữ liệu vào các trường dữ liệu trong modal
+            showCourseDataToModal(gCourseId);
+            // hiển thị modal lên
+            $("#update-course-modal").modal("show");
+        }
+
+        function onBtnUpdateCourseClick() {
+            // khai báo đối tượng chứa voucher data
+            var vCourseObj = {
+                "id": 0,
+                "courseCode": "",
+                "courseName": "",
+                "duration": "",
+                "level": "",
+                "price": "",
+                "discountPrice": "",
+                "teacherName": "",
+            };
+            // B1: Thu thập dữ liệu
+            getUpdateCourseData(vCourseObj);
+            // B2: Validate update
+            var vIsCourseValidate = validateCourseData(vCourseObj);
+            if (vIsCourseValidate) {
+                // B3: update course
+                updateCourse(vCourseObj);
+                // B4: xử lý front-end
+                alert("Sửa course thành công!");
+                loadDataToTable(gCoursesDB.courses);
+                resertUpdateCourseForm();
+                $("#update-course-modal").modal("hide");
+            }
+        }
+
+        function onBtnDeleteClick(paramBtnDelete) {
+            gCourseIdDelete = getCourseIdFromButton(paramBtnDelete);
+            $("#delete-confirm-modal").modal("show");
+        }
+
+        function onBtnConfirmDeleteCourseClick() {
+            deleteCourse(gCourseIdDelete, gCoursesDB.courses);
+            $("#delete-confirm-modal").modal("hide");
+        }
+        // REGION 4
+        function loadDataToTable(paramListCourse) {
+            gCoursesTable.clear();
+            gCoursesTable.rows.add(paramListCourse);
+            gCoursesTable.draw();
+        }
+
+        function getCreateCourseData(paramCourseObj) {
+            paramCourseObj.id = getNextId();
+            paramCourseObj.courseCode = $("#input-course-code").val().trim();
+            paramCourseObj.courseName = $("#input-course-name").val().trim();
+            paramCourseObj.duration = $("#input-duration").val().trim();
+            paramCourseObj.level = $("#input-level").val().trim();
+            paramCourseObj.price = $("#input-price").val().trim();
+            paramCourseObj.discountPrice = $("#input-discount-price").val().trim();
+            paramCourseObj.teacherName = $("#input-teacher").val().trim();
+        }
+
+        function validateCourseData(paramCourseObj) {
+            if (paramCourseObj.courseCode === "") {
+                alert("Course code cần nhập");
+                return false;
+            }
+            if (paramCourseObj.courseName === "") {
+                alert("Course name cần nhập");
+                return false;
+            }
+            if (paramCourseObj.duration === "") {
+                alert("Duration cần nhập");
+                return false;
+            }
+            if (paramCourseObj.level === "") {
+                alert("Level cần nhập");
+                return false;
+            }
+            if (paramCourseObj.price === "") {
+                alert("Price cần nhập");
+                return false;
+            }
+            if (paramCourseObj.discountPrice === "") {
+                alert("Discount price cần nhập");
+                return false;
+            }
+            if (paramCourseObj.teacherName === "") {
+                alert("Teacher name cần nhập");
+                return false;
+            }
+            return true;
+        }
+
+        function insertCourse(paramCourseObj) {
+            gCoursesDB.courses.push(paramCourseObj);
+        }
+
+        function resertCreateCourseForm() {
+            $("#input-course-code").val("");
+            $("#input-course-name").val("");
+            $("#input-duration").val("");
+            $("#input-level").val("");
+            $("#input-price").val("");
+            $("#input-update-discount-price").val("");
+            $("#input-teacher").val("");
+        }
+
+        function getNextId() {
+            var vNextId = 0;
+            // nếu mảng chưa có phần tử nào, thì id sẽ bắt đầu từ 1
+            if (gCoursesDB.courses.length == 0) {
+                vNextId = 1;
+            }
+            else { // id tiếp theo bằng id của phần tử cuối cùng cộng thêm 1
+                vNextId = gCoursesDB.courses[gCoursesDB.courses.length - 1].id + 1;
+            }
+            return vNextId;
+        }
+
+        function getCourseIdFromButton(paramButton) {
+            var vTableRow = $(paramButton).parents("tr");
+            var vCourseRowData = gCoursesTable.row(vTableRow).data();
+            return vCourseRowData.id;
+        }
+
+        function showCourseDataToModal(paramCourseId) {
+            var vCourseIndex = getIndexFormCourseId(paramCourseId);
+            $("#input-update-course-code").val(gCoursesDB.courses[vCourseIndex].courseCode);
+            $("#input-update-course-name").val(gCoursesDB.courses[vCourseIndex].courseName);
+            $("#input-update-duration").val(gCoursesDB.courses[vCourseIndex].duration);
+            $("#input-update-level").val(gCoursesDB.courses[vCourseIndex].level);
+            $("#input-update-price").val(gCoursesDB.courses[vCourseIndex].price);
+            $("#input-update-discount-price").val(gCoursesDB.courses[vCourseIndex].discountPrice);
+            $("#input-update-teacher").val(gCoursesDB.courses[vCourseIndex].teacherName);
+        }
+
+        function getIndexFormCourseId(paramCourseId) {
+            var vCourseIndex = -1;
+            var vCourseFound = false;
+            var vLoopIndex = 0;
+            while (!vCourseFound && vLoopIndex < gCoursesDB.courses.length) {
+                if (gCoursesDB.courses[vLoopIndex].id === paramCourseId) {
+                    vCourseIndex = vLoopIndex;
+                    vCourseFound = true;
+                }
+                else {
+                    vLoopIndex++;
+                }
+            }
+            return vCourseIndex;
+        }
+
+        function getUpdateCourseData(paramCourseObj) {
+            paramCourseObj.id = gCourseId;
+            paramCourseObj.courseCode = $("#input-update-course-code").val().trim();
+            paramCourseObj.courseName = $("#input-update-course-name").val().trim();
+            paramCourseObj.duration = $("#input-update-duration").val().trim();
+            paramCourseObj.level = $("#input-update-level").val().trim();
+            paramCourseObj.price = $("#input-update-price").val().trim();
+            paramCourseObj.discountPrice = $("#input-update-discount-price").val().trim();
+            paramCourseObj.teacherName = $("#input-update-teacher").val().trim();
+        }
+
+        function updateCourse(paramCourseObj) {
+            var vCourseIndex = getIndexFormCourseId(gCourseId);
+            gCoursesDB.courses.splice(vCourseIndex, 1, paramCourseObj);
+        }
+
+        function resertUpdateCourseForm() {
+            $("#input-update-course-code").val("");
+            $("#input-update-course-name").val("");
+            $("#input-update-duration").val("");
+            $("#input-update-level").val("");
+            $("#input-update-price").val("");
+            $("#input-update-update-discount-price").val("");
+            $("#input-update-teacher").val("");
+        }
+
+        function getCourseIdFromButton(paramButton) {
+            var vTableRow = $(paramButton).parents("tr");
+            var vCourseRowData = gCoursesTable.row(vTableRow).data();
+            return vCourseRowData.id;
+        }
+
+        function deleteCourse(paramCourseId, paramCourseObj) {
+            var vCourseIndex = getIndexFormCourseId(paramCourseId);
+            console.log(vCourseIndex)
+            paramCourseObj.splice(vCourseIndex, 1);
+            loadDataToTable(paramCourseObj)
+        }
+    });
+</script>
+
+</html>
